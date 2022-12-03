@@ -1,21 +1,26 @@
-name: Go package
-
-on: [push]
-
+name: Go Application
+on:
+  workflow_dispatch:
+    inputs:
+      go_version:
+        description: 'versions'
+        required: true
+        default: '1.18.8'
+        type: choice
+        options:
+        - 1.19.3
+        - 1.18.8
+        - 1.18.7
+        
 jobs:
-  build:
-
+  version-the-inputs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: |
+              sudo apt install gccgo-go
+              git clone https://github.com/go-training/helloworld.git
+        env:
+          LEVEL: ${{ inputs.versions}}
 
-      - name: Set up Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.15
-
-      - name: Build
-        run: go build -v ./...
-
-      - name: Test
-        run: go test -v ./...
