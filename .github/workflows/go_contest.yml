@@ -19,4 +19,5 @@ jobs:
     - uses: actions/setup-go@v3
       with:
        go-version: ${{ inputs.tags }} 
+    - run: go version
     - run: go run hello.go
