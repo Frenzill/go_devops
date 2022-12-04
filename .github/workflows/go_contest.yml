@@ -8,22 +8,15 @@ on:
         default: '1.18.3'
         type: choice
         options:
-        - 1.19.3
+        - 1.15
         - 1.18.8
-        - 1.17.11
-        
+        - 1.17       
 jobs:
   build:
-  
     runs-on: ubuntu-latest
     steps:
-       - name: Set up Go
-         uses: actions/setup-go@v3
-         with:
-           go-version:
-      
-      - run: |
-           sudo apt install gccgo-go
-           git clone https://github.com/go-training/helloworld.git
-        
-
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v3
+      with:
+       go-version: ${{ inputs.tags }} 
+    - run: go run hello.go
