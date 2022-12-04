@@ -20,4 +20,5 @@ jobs:
       with:
        go-version: ${{ inputs.tags }} 
     - run: go version
+    - run: go build hello.go
     - run: go run hello.go
